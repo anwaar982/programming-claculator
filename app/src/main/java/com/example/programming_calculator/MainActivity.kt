@@ -17,7 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        disableHexButtons()
+        enableTwoToNineButtons()
         binding.btn0.setOnClickListener {
             var input = binding.editOperation.text.toString()
             if (input == "0") input = ""
@@ -182,7 +183,34 @@ class MainActivity : AppCompatActivity() {
         binding.btnClear.setOnClickListener {
             clearInput()
         }
-    }
+        binding.btnHex.setOnClickListener {
+            numberSystem = HEX
+            binding.editOperation.text = binding.btnHexRes.text
+            enableHexButtons()
+            enableTwoToNineButtons()
+        }
+
+        binding.btnOctal.setOnClickListener {
+            numberSystem = OCTAL
+            binding.editOperation.text = binding.btnOctalRes.text
+            disableHexButtons()
+            enableTwoToNineButtons()
+            disable89Buttons()
+        }
+
+        binding.btnDic.setOnClickListener {
+            numberSystem = DECIMAL
+            binding.editOperation.text = binding.btnDecRes.text
+            disableHexButtons()
+            enableTwoToNineButtons()
+        }
+
+        binding.btnBin.setOnClickListener {
+            numberSystem = BINARY
+            binding.editOperation.text = binding.btnBinRes.text
+            disableHexButtons()
+            disableTwoToNineButtons()
+        }}
 
 
 
@@ -253,7 +281,53 @@ class MainActivity : AppCompatActivity() {
         BINARY -> Integer.parseInt(textInput, 2)
 
 
-    }}
+    }
+    private fun disableHexButtons() {
+        binding.btnA.isEnabled = false
+        binding.btnB.isEnabled = false
+        binding.btnC.isEnabled = false
+        binding.btnD.isEnabled = false
+        binding.btnE.isEnabled = false
+        binding.btnF.isEnabled = false
+    }
+
+    private fun enableHexButtons() {
+        binding.btnA.isEnabled = true
+        binding.btnB.isEnabled = true
+        binding.btnC.isEnabled = true
+        binding.btnD.isEnabled = true
+        binding.btnE.isEnabled = true
+        binding.btnF.isEnabled = true
+    }
+
+    private fun disable89Buttons() {
+        binding.btnNum8.isEnabled = false
+        binding.btnNum9.isEnabled = false
+    }
+
+    private fun enableTwoToNineButtons() {
+        binding.btnNum2.isEnabled = true
+        binding.btnNum3.isEnabled = true
+        binding.btnNum4.isEnabled = true
+        binding.btnNum5.isEnabled = true
+        binding.btnNum6.isEnabled = true
+        binding.btnNum7.isEnabled = true
+        binding.btnNum8.isEnabled = true
+        binding.btnNum9.isEnabled = true
+    }
+
+    private fun disableTwoToNineButtons() {
+        binding.btnNum2.isEnabled = false
+        binding.btnNum3.isEnabled = false
+        binding.btnNum4.isEnabled = false
+        binding.btnNum5.isEnabled = false
+        binding.btnNum6.isEnabled = false
+        binding.btnNum7.isEnabled = false
+        binding.btnNum8.isEnabled = false
+        binding.btnNum9.isEnabled = false
+    }
+}
+
 enum class NumberSystem {
     HEX, DECIMAL, OCTAL, BINARY
 }
