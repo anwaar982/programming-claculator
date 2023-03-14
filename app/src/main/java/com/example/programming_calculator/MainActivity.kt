@@ -186,13 +186,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        private fun clearInput() {
-            binding.editOperation.text = ""
-            binding.btnHexRes.text = ""
-            binding.btnDecRes.text = ""
-            binding.btnOctalRes.text = ""
-            binding.btnBinRes.text = ""
-        }
+    private fun clearInput() {
+        binding.editOperation.text = ""
+        binding.btnHexRes.text = ""
+        binding.btnDecRes.text = ""
+        binding.btnOctalRes.text = ""
+        binding.btnBinRes.text = ""
+    }
 
 
     private fun convertToNumberSystems(textInput: String) {
@@ -229,12 +229,12 @@ class MainActivity : AppCompatActivity() {
                 binding.btnBinRes.text = decimal.toUInt().toString(2)
 
 
+            }
+
+
         }
 
-
     }
-
-}
     private fun convertDecimalToNumberSystem(input: String): String {
         val decimalValue = input.toInt()
         return when (numberSystem) {
@@ -253,11 +253,10 @@ class MainActivity : AppCompatActivity() {
         BINARY -> Integer.parseInt(textInput, 2)
 
 
-}}
+    }}
 enum class NumberSystem {
     HEX, DECIMAL, OCTAL, BINARY
 }
-
 
 
 
