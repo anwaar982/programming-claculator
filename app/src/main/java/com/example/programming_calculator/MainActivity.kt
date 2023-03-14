@@ -7,13 +7,11 @@ import com.example.programming_calculator.NumberSystem.*
 import com.example.programming_calculator.databinding.ActivityMainBinding
 
 
-enum class NumberSystem {
-    HEX, DECIMAL, OCTAL, BINARY
-}
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    private var numberSys = DECIMAL
+    private var numberSystem = DECIMAL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -176,14 +174,12 @@ class MainActivity : AppCompatActivity() {
             if (textInput == "") binding.editOperation.text = ""
             else {
                 val inputValue = convertNumberSystemToDecimal(textInput).toString()
-                val result = convertDecimalNumberToNumberSystem(inputValue)
+                val result = convertDecimalToNumberSystem(inputValue)
                 convertToNumberSystems(result)
             }
         }
 
         binding.btnClear.setOnClickListener {
-
-            binding.editOperation.text = ""
             clearInput()
         }
     }
@@ -201,7 +197,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun convertToNumberSystems(textInput: String) {
 
-        when (numberSys) {
+        when (numberSystem) {
             HEX -> {
                 val decimal = textInput.toInt(16)
                 binding.btnHexRes.text = decimal.toUInt().toString(16)
@@ -239,9 +235,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-    private fun convertDecimalNumberToNumberSystem(input: String): String {
+    private fun convertDecimalToNumberSystem(input: String): String {
         val decimalValue = input.toInt()
-        return when (numberSys) {
+        return when (numberSystem) {
             DECIMAL -> decimalValue.toString()
             HEX -> Integer.toHexString(decimalValue)
             BINARY -> Integer.toBinaryString(decimalValue)
@@ -250,7 +246,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun convertNumberSystemToDecimal(textInput: String) = when (numberSys) {
+    private fun convertNumberSystemToDecimal(textInput: String) = when (numberSystem) {
         HEX -> Integer.parseInt(textInput, 16)
         DECIMAL -> textInput.toInt()
         OCTAL -> Integer.parseInt(textInput, 8)
@@ -258,6 +254,9 @@ class MainActivity : AppCompatActivity() {
 
 
 }}
+enum class NumberSystem {
+    HEX, DECIMAL, OCTAL, BINARY
+}
 
 
 
